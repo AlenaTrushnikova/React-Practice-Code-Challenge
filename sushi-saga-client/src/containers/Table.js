@@ -1,32 +1,40 @@
-import React, { Fragment } from 'react'
+import React, {Fragment} from 'react'
 
 const Table = (props) => {
 
-  const renderPlates = (array) => {
-    return array.map((x, index) => {
-      return <div className="empty-plate" style={{ top: -7 * index }}/>
-    })
-  }
+    /**
+     * renderPlates takes an array and renders an empty plate for every element in the array
+     * @param array
+     * @returns {*}
+     */
+    const renderPlates = (array) => {
+        return array.map((x, index) => {
+            return <div className="empty-plate" style={{top: -7 * index}}/>
+        })
+    }
 
-  return (
-    <Fragment>
-      <h1 className="remaining">
-        You have: ${ /* Give me how much money I have left */ } remaining!
-      </h1>
-      <div className="table">
-        <div className="stack">
-          {
-            /* 
-               renderPlates takes an array 
-               and renders an empty plate
-               for every element in the array
-            */
-            renderPlates([])
-          }
-        </div>
-      </div>
-    </Fragment>
-  )
+    return (
+        <Fragment>
+            <h1 className="remaining">
+                You have: ${props.budget} remaining!
+                <form onSubmit={(event) => props.addMoney(event)}>
+                    <label>$</label>
+                    <input type="text" id="money" />
+                    <input type="submit" value="Add Money"/>
+                </form>
+            </h1>
+            <div className="table">
+                <div className="stack">
+                    {
+                        /**
+                         * renderPlates takes an array and renders an empty plate for every element in the array
+                         */
+                        renderPlates(props.eatenSushi)
+                    }
+                </div>
+            </div>
+        </Fragment>
+    )
 }
 
 export default Table
